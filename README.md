@@ -2,7 +2,7 @@
 
 Source code of our paper **CoT2G-F**: Co-attention-based Transformer model to bridge Genotype and Fitness, using the JAX/FAX backend.
 
-![]('./figure_1.svg')
+![]('./figure.pdf')
 
 Our method is implemented based on the open-source toolkit [Tansformers](https://huggingface.co/docs/transformers/index).
 
