@@ -2,7 +2,7 @@
 
 Source code of our paper **CoT2G-F**: Co-attention-based Transformer model to bridge Genotype and Fitness, using the JAX/FAX backend.
 
-![]('./figure.png')
+![model architecture]('./figure.png')
 
 Our method is implemented based on the open-source toolkit [Tansformers](https://huggingface.co/docs/transformers/index).
 
@@ -172,6 +172,7 @@ python ./flax/summarization/predict_summarization_flax.py \
 - `csc`, `grammer`: whether to calculate and save the csc score and grammeratility value to `generate_file_name`.
 
 ## Usage 
+If you want to increase the amount of spike protein training or migrate our work to other other proteins, you just need to go through the following three steps:
 
 - Tokenizer
 - Pre-train
