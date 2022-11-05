@@ -17,5 +17,5 @@ python run_summarization_flax.py \
 	--per_device_train_batch_size 8 \
 	--per_device_eval_batch_size 8 \
 	--overwrite_output_dir \
-	--max_source_length 1280 \
-    --max_target_length 1280 > ./seqs.log 2>&1 &
+	--max_source_length 512 \
+    --max_target_length 512 > ./seqs.log 2>&1 &
