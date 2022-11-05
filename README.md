@@ -2,7 +2,7 @@
 
 Source code of our paper **CoT2G-F**: Co-attention-based Transformer model to bridge Genotype and Fitness, using the JAX/FAX backend.
 
-![]('./figure.pdf')
+![]('./model.png')
 
 Our method is implemented based on the open-source toolkit [Tansformers](https://huggingface.co/docs/transformers/index).
 
@@ -95,7 +95,7 @@ s2_result=./data/output/s2_results.csv
 
 s_co_result=./data/output/s_co_results.csv
 
-python ./transformers/examples/flax/summarization/predict_summarization_flax.py \
+python ./flax/summarization/predict_summarization_flax.py \
 	--output_dir ./seqs_s1_predict \
 	--model_name_or_path ${s1_modelfile}\
 	--tokenizer_name ${s1_modelfile} \
@@ -112,7 +112,7 @@ python ./transformers/examples/flax/summarization/predict_summarization_flax.py 
 
 wait
 
-python ./transformers/examples/flax/summarization/predict_summarization_flax.py \
+python ./flax/summarization/predict_summarization_flax.py \
 	--output_dir ./seqs_s2_predict \
 	--model_name_or_path ${s2_modelfile} \
 	--tokenizer_name ${s2_modelfile} \
@@ -151,7 +151,7 @@ s_predict=./data/input/s_seq_to_seq.csv
 s_modelfile=./model/seqs_s
 s_vallina_result=./data/output/s_vallina_results.csv
 
-python ./transformers/examples/flax/summarization/predict_summarization_flax.py \
+python ./flax/summarization/predict_summarization_flax.py \
 	--output_dir ./seqs_s_predict \
 	--model_name_or_path ${s_modelfile} \
 	--tokenizer_name ${s_modelfile} \
