@@ -2,21 +2,21 @@ import pandas as pd
 
 def parse_args():
     import argparse
-    parser = argparse.ArgumentParser(description='')
+    parser = argparse.ArgumentParser(description='Preprocess of spike protein sequence data.')
     parser.add_argument('--fasta-filename', type=str, default=None,
-                        help='')
+                        help='spike protein sequence file name')
     parser.add_argument('--neighbor-metadata-filename', type=str, default=None,
-                        help='')
+                        help='spike protein sequence neighbor sequence id in last mouth.')
     parser.add_argument('--date-metadata-filename', type=str, default=None,
-                        help='')
+                        help='the date of spike protein sequence, granularity to month')
     parser.add_argument('--split', type=bool, default=None,
-                        help='')
+                        help='whether split the spike protein sequence to s1 and s2, CoT2G-F need to set True.')
     parser.add_argument('--s1-input-filename', type=str, default='s1_seq_to_seq_demo.csv',
-                        help='')
+                        help='preprocessing result output , s1')
     parser.add_argument('--s2-input-filename', type=str, default='s2_seq_to_seq_demo.csv',
-                        help='')
+                        help='preprocessing result output , s2')
     parser.add_argument('--s-input-filename', type=str, default='s_seq_to_seq_demo.csv',
-                        help='')
+                        help='preprocessing result output , s, used for Vallina Transformer method.')
     
     args = parser.parse_args()
     return args

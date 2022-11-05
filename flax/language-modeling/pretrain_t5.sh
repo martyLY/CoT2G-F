@@ -1,10 +1,14 @@
+model_dir=MODEL_DIR
+data=PATH_TO_DATA
+max_seq_length=MAX_SEQ_LENGTH
+
 python run_t5_mlm_flax.py \
-	--output_dir="./s-t5-small-vallina" \
+	--output_dir=${MODEL_DIR} \
 	--model_type="t5-small" \
-	--config_name="./s-t5-small-vallina" \
-	--tokenizer_name="./s-t5-small-vallina" \
-	--train_file="/data00/transed_data/S/S.txt" \
-	--max_seq_length="1300" \
+	--config_name=${MODEL_DIR} \
+	--tokenizer_name=${MODEL_DIR} \
+	--train_file=${data} \
+	--max_seq_length=${MAX_SEQ_LENGTH} \
 	--num_train_epochs="5" \
 	--per_device_train_batch_size="16" \
 	--per_device_eval_batch_size="16" \
@@ -17,4 +21,4 @@ python run_t5_mlm_flax.py \
 	--overwrite_output_dir \
 	--logging_steps="500" \
 	--save_steps="1000" \
-	--eval_steps="2500" > ./train_v2.log 2>&1 &
+	--eval_steps="2500" > ./pre-train.log 2>&1

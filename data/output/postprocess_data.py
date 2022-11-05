@@ -3,13 +3,13 @@ from pandas import DataFrame
 
 def parse_args():
     import argparse
-    parser = argparse.ArgumentParser(description='Post process the csc score and grammer of generated spike protein sequence.')
+    parser = argparse.ArgumentParser(description='Post process the csc score and grammer of generated spike protein sequence, only for CoT2G-F method.')
     parser.add_argument('--s1-filename', type=str, default=None,
-                        help='')
+                        help='s1 generation results file name.')
     parser.add_argument('--s2-filename', type=str, default=None,
-                        help='')
+                        help='s2 generation results file name.')
     parser.add_argument('--s-results-filename', type=str, default=None,
-                        help='')
+                        help='s1 and s2 merged results file name.')
     args = parser.parse_args()
     return args
 
