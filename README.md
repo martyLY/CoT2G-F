@@ -33,7 +33,7 @@ Our method is implemented based on the open-source toolkit [Tansformers](https:/
 We provide a script to install all necessary python depandencies for our code. 
 
 ```bash
-pip install ./requirements.txt
+pip install -r ./requirements.txt
 ```
 
 ## Quick Start
