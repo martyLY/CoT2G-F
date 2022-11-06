@@ -12,6 +12,13 @@ Our method is implemented based on the open-source toolkit [Tansformers](https:/
 
 - Jax 0.3.15
 
+  - Running on CPU
+
+    ```bash
+    pip install --upgrade pip
+    pip install --upgrade "jax[cpu]"
+    ```
+
   - Running on single or multiple GPUs (**recommend**)
 
     ```bash
@@ -23,12 +30,6 @@ Our method is implemented based on the open-source toolkit [Tansformers](https:/
 
   You can also follow this [guide for installing JAX on GPUs](https://github.com/google/jax/#pip-installation-gpu-cuda) since the installation depends on your CUDA and CuDNN version.
   
-  - Running on CPU
-  
-    ```bash
-    pip install --upgrade pip
-    pip install --upgrade "jax[cpu]"
-    ```
 
 We provide a script to install all necessary python depandencies for our code. 
 
