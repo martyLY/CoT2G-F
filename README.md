@@ -48,7 +48,7 @@ We provide two ways to generate mutated spike protein sequence and calculate cor
 
 ### Checkpoints
 
-First, you should download our pre-trained checkpoints, all checkpoints are provided in this [Google drive folder](https://drive.google.com/drive/folders/1LOclCe5M5evYmGdS1las-5pUosw05by4?usp=share_link), please place the pretrained checkpoints under the directory `./model`. If you only want to do generation task, then you just need to download these three checkpoints:  `./model/seqs_s1` ,  `./model/seqs_s2`  and  `./model/seqs_s`.
+First, you should download our pre-trained checkpoints, all checkpoints are provided in this [Google drive folder](https://drive.google.com/drive/folders/1Hbm6PluF3ko6hogIz7B8HXGVotF4pztw?usp=share_link), please place the pretrained checkpoints under the directory `./model`. If you only want to do generation task, then you just need to download these three checkpoints:  `./model/seqs_s1` ,  `./model/seqs_s2`  and  `./model/seqs_s`.
 
 ### Data pre-processing
 
