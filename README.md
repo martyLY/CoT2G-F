@@ -8,9 +8,9 @@ Our method is implemented based on the open-source toolkit [Tansformers](https:/
 
 ## Dependencies
 
-- Python 3.8.8
+- Python==3.8.8
 
-- Jax 0.3.15
+- Jax==0.3.15
 
   - Running on CPU
 
