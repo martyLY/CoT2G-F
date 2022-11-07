@@ -2,7 +2,7 @@
 
 Source code of our paper **CoT2G-F**: Co-attention-based Transformer model to bridge Genotype and Fitness, using the JAX/FAX backend.
 
-![model architecture]('./figure.png')
+![model architecture](https://github.com/martyLY/CoT2G-F/blob/74ebc200ee71739cae045b3d1afb2ad84b2e8cb5/figure.png)
 
 Our method is implemented based on the open-source toolkit [Tansformers](https://huggingface.co/docs/transformers/index).
 
@@ -60,7 +60,7 @@ You need to prepare a `spike.fasta` file, where you want to inference the future
 cd ./data/input
 python preprocess_data.py \
     --fasta-filename spike.fasta \
-    --s-input-filename ./data/input/s_seq_to_seq.csv
+    --s-input-filename s_seq_to_seq.csv
 ```
 
 Or you want to get more accurate mutations, you can choose our **CoT2G-F** method, in this case you would also need to prepare two additional meta files, one is `date_meta_data.csv`, which specify the period when your spike protein sequence appears (please refer to [GISAID](https://gisaid.org)), it needs to be accurate to the year-month, e.g. 2020-01, 2021-12, the other is `neighbor_meta_data.csv`, in this meta data file, you need to specify the temporal neighbor sequence of the input protein sequence in the last month(please refer this).Finally, execute
@@ -72,9 +72,9 @@ python preprocess_data.py \
     --neighbor-metadata-filename neighbor_meta_data.csv \
     --date-metadata-filename date_meta_data.csv \
     --split True \
-    --s1-input-filename ./data/input/s1_seq_to_seq.csv \
-    --s2-input-filename ./data/input/s2_seq_to_seq.csv \
-    --s-input-filename ./data/input/s_seq_to_seq.csv
+    --s1-input-filename s1_seq_to_seq.csv \
+    --s2-input-filename s2_seq_to_seq.csv \
+    --s-input-filename s_seq_to_seq.csv
 ```
 
 
