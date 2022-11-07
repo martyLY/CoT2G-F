@@ -52,7 +52,7 @@ First, you should download our pre-trained checkpoints, all checkpoints are prov
 
 ### Data pre-processing
 
-We use the public GISAID ptotein sequence data (download [here](https://gisaid.org)), alternatively, if you only want to inference mutations of a small part of the spike ptotein sequence and do not want to download such a large amount of GISAID data, we also provide some example data in the directory `./data/input`  for your reference and preparation.
+We use the public GISAID ptotein sequence dataset (download [here](https://gisaid.org)), alternatively, if you only want to inference mutations of a small part of the spike ptotein sequence and do not want to download such a large amount of GISAID data, we also provide some example data in the directory `./data/input`  for your reference and preparation.
 
 You need to prepare a `spike.fasta` file, where you want to inference the future mutations of these protein sequences, then if you choose the **Vallina Transformer** method, execute the followed script, your data preprocessing results are placed in `s-input-filename`.
 
@@ -173,7 +173,7 @@ python ./flax/summarization/predict_summarization_flax.py \
 - `csc`, `grammer`: whether to calculate and save the csc score and grammeratility value to `generate_file_name`.
 
 ## Usage 
-If you want to increase the amount of spike protein training or migrate our work to other other proteins, you just need to go through the following three steps:
+If you want to increase the amount of spike protein training or migrate our work to other proteins, you just need to go through the following three steps:
 
 ### Tokenizer
 
