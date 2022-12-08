@@ -192,14 +192,16 @@ python ./flax/language-modeling/tokenizer.py \
 model_dir=MODEL_DIR
 data=PATH_TO_DATA
 max_seq_length=MAX_SEQ_LENGTH
+top_data=PATH_TO_TOP_DATA
+down_data=PATH_TO_DOWN_DATA
 
 python ./flax/language-modeling/run_t5_mlm_flax.py \
-	--output_dir=${MODEL_DIR} \
+	--output_dir=${model_dir} \
 	--model_type="t5-small" \
-	--config_name=${MODEL_DIR} \
-	--tokenizer_name=${MODEL_DIR} \
+	--config_name=${model_dir} \
+	--tokenizer_name=${model_dir} \
 	--train_file=${data} \
-	--max_seq_length=${MAX_SEQ_LENGTH} \
+	--max_seq_length=${max_seq_length} \
 	--num_train_epochs="5" \
 	--per_device_train_batch_size="16" \
 	--per_device_eval_batch_size="16" \
@@ -212,7 +214,51 @@ python ./flax/language-modeling/run_t5_mlm_flax.py \
 	--overwrite_output_dir \
 	--logging_steps="500" \
 	--save_steps="1000" \
-	--eval_steps="2500" > ./pre-train.log 2>&1
+	--eval_steps="2500" 
+wait
+
+python ./flax/language-modeling/run_t5_mlm_flax.py \
+	--output_dir=${model_dir} \
+	--model_type="t5-small" \
+	--config_name=${model_dir} \
+	--tokenizer_name=${model_dir} \
+	--train_file=${top_data} \
+	--max_seq_length=${max_seq_length} \
+	--num_train_epochs="1" \
+	--per_device_train_batch_size="16" \
+	--per_device_eval_batch_size="16" \
+	--adafactor \
+	--do_train \
+	--do_eval \
+	--learning_rate="0.005" \
+	--weight_decay="0.001" \
+	--warmup_steps="2000" \
+	--overwrite_output_dir \
+	--logging_steps="500" \
+	--save_steps="1000" \
+	--eval_steps="2500"
+wait
+
+python ./flax/language-modeling/run_t5_mlm_flax.py \
+	--output_dir=${model_dir} \
+	--model_type="t5-small" \
+	--config_name=${model_dir} \
+	--tokenizer_name=${model_dir} \
+	--train_file=${down_data} \
+	--max_seq_length=${max_seq_length} \
+	--num_train_epochs="1" \
+	--per_device_train_batch_size="16" \
+	--per_device_eval_batch_size="16" \
+	--adafactor \
+	--do_train \
+	--do_eval \
+	--learning_rate="0.005" \
+	--weight_decay="0.001" \
+	--warmup_steps="2000" \
+	--overwrite_output_dir \
+	--logging_steps="500" \
+	--save_steps="1000" \
+	--eval_steps="2500"> ./pretrain.log 2>&1
 ```
 
 ### Fine-tune
@@ -220,19 +266,59 @@ python ./flax/language-modeling/run_t5_mlm_flax.py \
 ```bash
 model_dir=MODEL_DIR
 new_model_dir=NEW_MODEL_DIR
-train_data=PATH_TO_TRAIN_DATA
-vaild_data=PATH_TO_VALID_DATA
-test_data=PATH_TO_TEST_DATA
+train_forward_data=PATH_TO_TRAIN_FORWARD_DATA
+vaild_forward_data=PATH_TO_VALID_FORWARD_DATA
+test_forward_data=PATH_TO_TEST_FORWARD_DATA
+train_top_data=PATH_TO_TRAIN_TOP_DATA
+vaild_top_data=PATH_TO_VALID_TOP_DATA
+test_top_data=PATH_TO_TEST_TOP_DATA
+train_down_data=PATH_TO_TRAIN_DOWN_DATA
+vaild_down_data=PATH_TO_VALID_DOWN_DATA
+test_down_data=PATH_TO_TEST_DOWN_DATA
+
 
 python run_summarization_flax.py \
 	--output_dir ${new_model_dir} \
 	--model_name_or_path ${model_dir} \
 	--tokenizer_name ${model_dir} \
-	--train_file=${train_data} \
-	--test_file=${test_data} \
-	--validation_file=${vaild_data} \
+	--train_file=${train_forward_data} \
+	--test_file=${test_forward_data} \
+	--validation_file=${vaild_forward_data} \
 	--do_train --do_eval \
 	--num_train_epochs 4 \
+	--learning_rate 5e-5 --warmup_steps 0 \
+	--per_device_train_batch_size 8 \
+	--per_device_eval_batch_size 8 \
+	--overwrite_output_dir \
+	--max_source_length 512 \
+  	--max_target_length 512 
+
+wait
+python run_summarization_flax.py \
+	--output_dir ${new_model_dir} \
+	--model_name_or_path ${model_dir} \
+	--tokenizer_name ${model_dir} \
+	--train_file=${train_top_data} \
+	--test_file=${test_top_data} \
+	--validation_file=${vaild_top_data} \
+	--do_train --do_eval \
+	--num_train_epochs 1 \
+	--learning_rate 5e-5 --warmup_steps 0 \
+	--per_device_train_batch_size 8 \
+	--per_device_eval_batch_size 8 \
+	--overwrite_output_dir \
+	--max_source_length 512 \
+  	--max_target_length 512 
+wait
+python run_summarization_flax.py \
+	--output_dir ${new_model_dir} \
+	--model_name_or_path ${model_dir} \
+	--tokenizer_name ${model_dir} \
+	--train_file=${train_down_data} \
+	--test_file=${test_down_data} \
+	--validation_file=${vaild_down_data} \
+	--do_train --do_eval \
+	--num_train_epochs 1 \
 	--learning_rate 5e-5 --warmup_steps 0 \
 	--per_device_train_batch_size 8 \
 	--per_device_eval_batch_size 8 \
