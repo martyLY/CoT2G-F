@@ -1,5 +1,5 @@
 #!/bin/bash
-export CUDA_VISIBLE_DEVICES=1
+export CUDA_VISIBLE_DEVICES=0
 
 s1_predict=./data/input/s1_seq_to_seq.csv
 s1_modelfile=./model/seqs_s1
@@ -15,7 +15,7 @@ s_co_result=./data/output/s_co_results.csv
 # s_modelfile=./model/seqs_s
 # s_vallina_result=./data/output/s_vallina_results.csv
 
-python ./transformers/examples/flax/summarization/predict_summarization_flax.py \
+python ./flax/summarization/predict_summarization_flax.py \
 	--output_dir ./seqs_s1_predict \
 	--model_name_or_path ${s1_modelfile}\
 	--tokenizer_name ${s1_modelfile} \
@@ -32,7 +32,7 @@ python ./transformers/examples/flax/summarization/predict_summarization_flax.py 
 
 wait
 
-python ./transformers/examples/flax/summarization/predict_summarization_flax.py \
+python ./flax/summarization/predict_summarization_flax.py \
 	--output_dir ./seqs_s2_predict \
 	--model_name_or_path ${s2_modelfile} \
 	--tokenizer_name ${s2_modelfile} \
@@ -57,7 +57,7 @@ python ./data/output/postprocess_data.py \
 
 
 
-# python ./transformers/examples/flax/summarization/predict_summarization_flax.py \
+# python ./flax/summarization/predict_summarization_flax.py \
 # 	--output_dir ./seqs_s_predict \
 # 	--model_name_or_path ${s_modelfile} \
 # 	--tokenizer_name ${s_modelfile} \
