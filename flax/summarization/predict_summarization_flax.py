@@ -343,10 +343,10 @@ def get_mutations(seq1, seq2):
     for ch1, ch2 in zip(alignment[0], alignment[1]):
         if ch1 != ch2 and ch1 != '-' and ch2 != '-':
             mutations.append('{}{}{}'.format(ch1, pos + 1, ch2))
-        # if ch1 == '-' and ch2 != '-':
-        #     mutations.append('{}ins{}'.format(pos + 1, ch2))
-        # if ch1 != '-' and ch2 == '-':
-        #     mutations.append('{}{}del'.format(ch1, pos + 1))
+        if ch1 == '-' and ch2 != '-':
+            mutations.append('{}ins{}'.format(pos + 1, ch2))
+        if ch1 != '-' and ch2 == '-':
+            mutations.append('{}{}del'.format(ch1, pos + 1))
         if ch1 != '-':
             pos += 1
     return list(set(mutations))
@@ -725,6 +725,46 @@ def main():
 
         return probs, pred_mutations
 
+    def find_con(s):
+        l1 = []
+        res = []
+        for x in sorted(set(s)):
+            l1.append(x)
+            if x+1 not in s:
+                if len(l1) != 1 and len(l1) <=5:
+                    res.append(l1)
+                l1 = []
+        return res
+
+    def post_process_mutations(mutations):
+        new_mutations = []
+        for m in mutations:
+            real_ms = []
+            dels = []
+            real_dels = []
+            try:
+                temp = m.split(' ')
+                for t in temp:
+                    if 'del' not in t and 'X' not in t:
+                        real_ms.append(t)
+                    elif 'del' in t and 'X' not in t:
+                        dels.append(t)
+                sk = []
+                for k in dels:
+                    sk.append(int(k[1:-3]))
+                bid = find_con(sk)
+                con_sk = []
+                for bi in bid:
+                    con_sk.extend(bi)
+                for d in dels:
+                    if int(d[1:-3]) in con_sk:
+                        real_dels.append(d)
+                real_ms.extend(real_dels)
+                new_mutations.extend(real_ms)
+            except:
+                continue
+        return ' '.join(list(set(new_mutations)))
+
     def generate_step(params, batch):
         model.params = params
         output_ids = model.generate(batch["input_ids"], attention_mask=batch["attention_mask"], **gen_kwargs)
@@ -776,7 +816,9 @@ def main():
         
 
         # === Grammer ===
+        logger.info(f" ------------------------------------------------------calculate grammer.")
         grammaticality, pred_mutations = cal_prob(data_args.protein, base_seq, decoded_preds, word_pos_prob)
+        pred_mutations = post_process_mutations(pred_mutations)
 
         # print('=========',len(decoded_preds), len(pred_mutations),len(csc),len(grammaticality))
 
