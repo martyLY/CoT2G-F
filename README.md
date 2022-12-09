@@ -58,24 +58,35 @@ You need to prepare a `spike.fasta` file, where you want to inference the future
 
 ```bash
 cd ./data/input
+fasta_filename=FASTA
+s_filename=S
 python preprocess_data.py \
-    --fasta-filename spike.fasta \
-    --s-input-filename s_seq_to_seq.csv
+    --fasta-filename ${fasta_filename} \
+    --mask True \
+    --s-filename ${s_filename}
 ```
 
 Or you want to get more accurate mutations, you can choose our **CoT2G-F** method, in this case you would also need to prepare two additional meta files, one is `date_meta_data.csv`, which specify the period when your spike protein sequence appears (please refer to [GISAID](https://gisaid.org)), it needs to be accurate to the year-month, e.g. 2020-01, 2021-12, the other is `neighbor_meta_data.csv`, in this meta data file, you need to specify the temporal neighbor sequence of the input protein sequence in the last month(please refer this).Finally, execute
 
 ```bash
 cd ./data/input
+fasta_filename=FASTA
+neighbor_fasta_filename=NEIGHBPR_FASTA
+neighbor-metadata-filename=METADATA
+s1_filename=S1
+s2_filename=S2
+s_filename=S
 python preprocess_data.py \
-    --fasta-filename spike.fasta \
-    --neighbor-metadata-filename neighbor_meta_data.csv \
-    --date-metadata-filename date_meta_data.csv \
+    --fasta-filename ${fasta_filename} \
+    --neighbor-fasta-filename ${neighbor_fasta_filename} \
+    --neighbor-metadata-filename ${neighbor_metadata_filename} \
     --split True \
-    --s1-input-filename s1_seq_to_seq.csv \
-    --s2-input-filename s2_seq_to_seq.csv \
-    --s-input-filename s_seq_to_seq.csv
+    --mask True \
+    --s1-filename ${s1_filename} \
+    --s2-filename ${s2_filename} \
+    --s-filename ${s_filename}
 ```
+
 
 
 
