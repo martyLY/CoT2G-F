@@ -86,7 +86,22 @@ python preprocess_data.py \
     --s2-filename ${s2_filename} \
     --s-filename ${s_filename}
 ```
+Or you
 
+```bash
+cd ./data/input
+fasta_filename=FASTA
+s1_filename=S1
+s2_filename=S2
+s_filename=S
+python preprocess_data.py \
+    --fasta-filename ${fasta_filename} \
+    --wo-neighbor True \
+    --mask True \
+    --s1-filename ${s1_filename} \
+    --s2-filename ${s2_filename} \
+    --s-filename ${s_filename}
+```
 
 
 
