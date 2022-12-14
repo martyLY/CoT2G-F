@@ -795,8 +795,8 @@ def main():
                 generated_ids = p_generate_step(state.params, batch)
                 log_probs, decoder_hidden_states = p_eval_step(state.params, batch)
                 mut_embedding = np.squeeze(decoder_hidden_states)
-                batch_csc = np.sum(np.abs(base_embedding.mean(1) - mut_embedding.mean(1)), axis=1)
-                csc.extend(batch_csc)
+                batch_csc2 = np.sqrt(np.sum((np.abs(base_embedding.mean(1) - mut_embedding.mean(1)))**2+1e-8, axis=-1))
+                csc.extend(batch_csc2)
                 pred_generations.extend(jax.device_get(generated_ids.reshape(-1, gen_kwargs["max_length"])))
                 batch_shape = jax.device_get(generated_ids.reshape(-1, gen_kwargs["max_length"])).shape
                 logger.info(f" ------------------------------------------------------batch size: {batch_shape[0]}")
