@@ -15,6 +15,17 @@ s_filename=S
 #     --s2-filename ${s2_filename} \
 #     --s-filename ${s_filename}
 
+# demo for using neighbor_file
+# python preprocess_data.py \
+#     --fasta-filename S_t_negihbor.fa \
+#     --neighbor-fasta-filename S_t_1_neighbor.fa\
+#     --neighbor-metadata-filename t_1_neighbor.csv \
+#     --split True \
+#     --mask True \
+#     --s1-filename s1.csv \
+#     --s2-filename s2.csv \
+#     --s-filename s.csv
+
 python preprocess_data.py \
     --fasta-filename ${fasta_filename} \
     --mask True \
