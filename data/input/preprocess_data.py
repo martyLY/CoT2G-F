@@ -55,7 +55,10 @@ def get_mask_index(n):
     idx=np.arange(0,n).tolist()
     remain=idx
     mask=[]
-    tri_mask_num = random.randrange(0, int(mask_num/3)-1)
+    try:
+        tri_mask_num = random.randrange(0, int(mask_num/3)-1)
+    except:
+        return mask
     i=0
     while i <tri_mask_num:
         x=random.choice(remain)
