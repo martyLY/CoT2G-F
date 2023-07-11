@@ -51,14 +51,13 @@ def read_fasta(fasta_name):
     return data_df
 
 def get_mask_index(n):
-    mask_num= int(n*0.15)
+    # mask_num= int(n*0.15)
+    mask_num = 5
     idx=np.arange(0,n).tolist()
     remain=idx
     mask=[]
-    try:
-        tri_mask_num = random.randrange(0, int(mask_num/3)-1)
-    except:
-        return mask
+    # tri_mask_num = random.randrange(0, int(mask_num/3)-1)
+    tri_mask_num = 1
     i=0
     while i <tri_mask_num:
         x=random.choice(remain)
@@ -87,8 +86,7 @@ def get_mask_index(n):
             mask.append(x)
             i+=1
     return mask
-
-
+    
 def main():
     args = parse_args()
     print('load {} data...'.format(args.fasta_filename))
